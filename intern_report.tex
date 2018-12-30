@@ -1,0 +1,130 @@
+\documentclass[12pt] {article}
+\usepackage[margin=1in]{geometry} %one inch margins
+\renewcommand{\baselinestretch}{1.5} %double space, safe for fancy headers
+\usepackage{pslatex} %Times font
+\usepackage{graphicx} %for figures
+\usepackage{enumerate} %for lists
+\usepackage{fancyhdr} %header
+\pagestyle{fancy}
+\usepackage[font={small,sf},format=plain,labelfont=bf,up]{caption}
+\fancyhf{}
+\fancyhead[l,lo]{150001C \textit{ Internship Report}} %left top header
+\fancyhead[r,ro]{\thepage} %right top header
+\usepackage{kernelstyle}
+\usepackage{listings}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{graphicx}
+% \usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage[caption=false,font=timesnewroman]{subfig}
+\usepackage[final]{pdfpages}
+
+\graphicspath{{figures/}}
+
+\usepackage{xcolor}
+\usepackage{soul}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+\captionsetup[figure]{labelfont={bf},name={Fig.},labelsep=period}
+\captionsetup[table]{labelfont={bf},name={Table.},labelsep=period}
+\usepackage{caption}
+\usepackage{chngcntr} 
+\counterwithin{figure}{section}
+\counterwithin{table}{section}
+
+
+\usepackage{algorithmic}
+\usepackage[ruled, noend,lined,linesnumbered]{algorithm2e}
+
+\newcommand{\hlc}[2][yellow]{{%
+    \colorlet{foo}{#1}%
+    \sethlcolor{foo}\hl{#2}}%
+}
+
+\usepackage{hyperref}
+\hypersetup{
+   colorlinks=true,
+   linkcolor = black,
+   citecolor=Green
+}
+
+
+\title{INTERNSHIP REPORT}
+
+
+\definecolor{hgray}{RGB}{130,130,130}
+\definecolor{hred}{RGB}{136,0,0}
+\definecolor{black}{RGB}{0,0,0}
+\definecolor{Green}{RGB}{0,255,0}
+
+\usepackage[T1]{fontenc}
+\usepackage[tableposition=top]{caption}
+\usepackage{rotating}
+\usepackage{color, colortbl}
+\usepackage{booktabs, array, dcolumn}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{pgf-umlsd}
+\usepackage{multirow}
+\usepackage{epsfig}
+\usepackage{subfig}
+\usepackage{pgfplotstable}
+\usepackage{amsfonts}
+\usepackage{relsize}
+\usepackage{varwidth}
+\usepackage{url}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+% \usepackage{soul}
+\usepackage[normalem]{ulem}
+\usepackage{subfig}
+\usepackage{kernelstyle}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{hyperref}
+% \usepackage{tabularx}
+\usepackage{footnote}
+
+\definecolor{gray1}{gray}{0.9}
+\definecolor{gray2}{gray}{0.6}
+\definecolor{Gray}{gray}{0.9}
+
+
+\definecolor{light-gray1}{gray}{0.65}
+\definecolor{light-gray2}{gray}{0.95}
+
+%%------------------------ PREAMBLE ENDS ---------------------------
+
+\begin{document}
+\pagenumbering{roman} % Start roman numbering
+
+
+\newpage
+
+\tableofcontents
+\newpage
+\listoffigures
+\listoftables
+\newpage
+\pagenumbering{arabic}
+\input{0_preface_ack.tex}
+
+\newpage
+\section{Introduction to Training Establishment}
+\input{1_intro_data61.tex}
+
+\newpage
+\section{Training Experience}
+\input{2_projects.tex}
+
+\newpage
+\section{Conclusion}
+\input{3_conclusion.tex}
+
+
+\end{document}
