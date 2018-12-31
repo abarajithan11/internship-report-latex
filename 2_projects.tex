@@ -19,6 +19,14 @@ Mr. Nicolas Hudson arrived CSIRO only few weeks before us, after working as a se
 
 \subsubsection{Trailnet: An Introduction}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics
+        [width=10cm]
+        {figures/trailnet_redtail_object.png}
+    \caption{NVIDIA's Trailnet Navigating a Drone}\vspace{-4mm}
+\end{figure}
+
 In 2017, four researchers published a paper titled "Toward Low-Flying Autonomous MAV Trail Navigation using Deep Neural Networks for Environmental Awareness"~\cite{trailNet} (Trailnet paper in short) with the funding of NVIDIA. The paper describes the following:
 
 \begin{itemize}
@@ -30,6 +38,62 @@ In 2017, four researchers published a paper titled "Toward Low-Flying Autonomous
     \item Usage of YOLO for obstacle detection and algorithm for obstacle avoidance.
     \item Results and observations after flying the quadcopter autonomously in the forest trail for several kilometers.
 \end{itemize}
+
+\subsubsection{Building Trailnet from scratch}
+
+% Image: Architecture
+\begin{figure}[H]
+    \centering
+    \includegraphics
+        [width=16cm]
+        {figures/trailnet.PNG}
+    \caption{Simplified Trailnet Architecture and Post Processing}\vspace{-4mm}
+\end{figure}
+
+\subsubsection{Data collection and training Trailnet from scratch}
+
+% Image: IDSIA
+\begin{figure}[H]
+    \centering
+    \includegraphics
+        [width=16cm]
+        {figures/idsia_dataset.PNG}
+    \caption{IDSIA Dataset of 40,000 images}\vspace{-4mm}
+\end{figure}
+
+% Image: Hallway Dataset
+\begin{figure}[H]
+    \centering
+    \includegraphics
+        [width=16cm]
+        {figures/hallway_dataset.PNG}
+    \caption{Hallway Dataset of 120,000 images}\vspace{-4mm}
+\end{figure}
+
+\subsubsection{Deployment on a Robot and Testing}
+
+% Image: Disturbances
+\begin{figure}[H]
+    \centering
+    \includegraphics
+        [width=.4\linewidth]
+        {figures/wallie_self_run.png}
+    \includegraphics
+        [width=.4\linewidth]
+        {figures/trailnet_after_kick.png}
+    \caption{Our indoor Trailnet CNN reacting to external disturbances}\vspace{-4mm}
+    
+\end{figure}
+
+% Image: Corners
+\begin{figure}[H]
+    \centering
+    \includegraphics
+        [width=6cm]
+        {figures/wallie_self_turn.png}
+    \caption{Our CNN reacting to corners}\vspace{-4mm}
+    
+\end{figure}
 
 
 \newpage
@@ -101,8 +165,6 @@ In 2017, four researchers published a paper titled "Toward Low-Flying Autonomous
 
 
 
-
-
 \newpage
 \subsection{Designing and Implementing an Efficient End-toEnd Pipeline for Machine Learning in Robotics}
 
@@ -125,6 +187,15 @@ In 2017, four researchers published a paper titled "Toward Low-Flying Autonomous
         {figures/tfrecord_structure.PNG}
     \caption{Structure of a TF Record}\vspace{-4mm}
 \end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics
+        [width=16cm]
+        {figures/input_pipeline.PNG}
+    \caption{Data Input Pipeline with TFRecords}\vspace{-4mm}
+\end{figure}
+
 
 \subsubsection{TensorRT: Deployment on a low power device}
 
@@ -161,11 +232,55 @@ In 2017, four researchers published a paper titled "Toward Low-Flying Autonomous
 
 \subsubsection{Preprocessing IMU and Velocity Data}
 
+\subsubsection{Data Collection}
+
+% Image: Data Collect
+\begin{figure}[H]
+    \centering
+    \includegraphics
+        [width=8cm]
+        {figures/hillnet_data_collect.png}
+    \includegraphics
+        [width=8cm]
+        {figures/hillnet_data_collect_2.png}
+    \caption{Data collection to train hillnet}\vspace{-4mm}
+\end{figure}
+
 \subsubsection{Classification Approach}
+
+% Image: Classify Architecture
+\begin{figure}[H]
+    \centering
+    \includegraphics
+        [width=16cm]
+        {figures/hillnet_classify.PNG}
+    \caption{Hillnet Classification Architecture}\vspace{-4mm}
+    
+\end{figure}
 
 \subsubsection{Regression Approach}
 
+% Image: Regress Architecture
+\begin{figure}[H]
+    \centering
+    \includegraphics
+        [width=16cm]
+        {figures/hillnet_regress.PNG}
+    \caption{Hillnet Regression Architecture}\vspace{-4mm}
+    
+\end{figure}
+
 \subsubsection{Merging Scaler and Image Inputs}
+
+% Image: Merge Inputs
+\begin{figure}[H]
+    \centering
+    \includegraphics
+        [width=16cm]
+        {figures/merge_inputs.PNG}
+    \caption{Merging by Broadcast and Add}\vspace{-4mm}
+    
+\end{figure}
 
 \subsubsection{Problems Faced and Solutions}
 
@@ -194,3 +309,10 @@ In 2017, four researchers published a paper titled "Toward Low-Flying Autonomous
 \newpage
 \subsection{Presenting the Pipeline at Reading Group to the Scientists}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics
+        [width=12cm]
+        {figures/presentation.png}
+    \caption{Presenting the Pipeline}\vspace{-4mm}
+\end{figure}
