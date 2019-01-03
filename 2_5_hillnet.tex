@@ -9,7 +9,21 @@ After successfully demonstrating indoor-Trailnet built from scratch, trained and
 \subsubsection{Preprocessing IMU and Velocity Data}
 
 \paragraph{}
-The LORD Microstrain IMU sends its data through serial to its ROS package, which publishes the IMU readings in two types: as a quarternion and set of cartesian x,y,z vector components of perceived acceleration. I decided to use the vector components to calculate the magnitude and direction of the gravity vector projected on the horizontal plane of the robot. Direction $\theta \in [-\pi, \pi]$ was measured with respect to the heading direction and then converted to $[0, 1]$ range using the sigmoid function to match the range of the other normalized inputs. I chose to output the angular velocity as a float $\in [0,1]$ using a sigmoid output node (in classification approach) and scale it to the necessary angular Velocity. 
+The LORD Microstrain IMU sends its data through serial to its ROS package, which publishes the IMU readings in two types: as a quaternion and set of cartesian x,y,z vector components of perceived acceleration. I decided to use the vector components to calculate the magnitude and direction of the gravity vector projected on the horizontal plane of the robot. Direction $\theta \in [-\pi, \pi]$ was measured with respect to the heading direction and then converted to $[0, 1]$ range using the sigmoid function to match the range of the other normalized inputs. I chose to output the angular velocity as a float $\in [0,1]$ using a sigmoid output node (in classification approach) and scale it to the necessary angular Velocity.
+
+\begin{align*}
+    x, y, z   &= \text{Magnitude of the cartesian components of perceived acceleration. x: forward, z: vertical} \\
+    r, \theta &= \text{polar components of the acceleration vector projected on the horizontal plane of robot} \\
+    r_{in}, theta_{in}     &= \text{processed values given as input to the network}
+\end{align*}
+
+\begin{align*}
+    r &= \sqrt{x^2 + y^2} \\
+    r_{in} &= \tfrac{r}{g} & \text{normalized by the maximum: g} \\
+    \theta &= \arctan({\tfrac{y}{x}})     &  \theta \in [-\pi,\pi] \\
+    \theta_{in} &= \text{sigmoid}(\theta) &  \theta_{in} \in [0,1]
+\end{align*}
+
 
 \newpage
 \subsubsection{Data Collection}

@@ -173,6 +173,48 @@ The main advantage for choosing roboclaw was the availability of a compatible RO
 
 \subsubsection{Lord Microstrain IMU}
 
+% Image: Realsense
+\begin{figure}[H]
+    \centering
+    \includegraphics
+        [width=8cm]
+        {figures/imu.png}
+    \caption{Lord Microstrain 3DM®-GX5-45 GNSS-Aided Inertial Navigation System}\vspace{-4mm}
+\end{figure}
+
+\paragraph{}
+Lord Microstrain 3DM®-GX5-45 GNSS-Aided Inertial Navigation System is the state of the art IMU sensor. We were given one of these to be used as the IMU sensor in our robot for hill-climbing. We found a relevant ROS package that can interface with the device via serial and publish the readings in two forms: rotation quaternions and cartesian vector components of the perceived acceleration. I used the vector components to find the direction of the slope.\\
+
+
+
+\begin{table}[H]
+    \begin{center}
+        \begin{tabular}{|| r || p{10cm} ||}
+            \hline
+            Integrated sensors             	& Triaxial accelerometer, triaxial gyroscope, triaxial magnetometer, pressure altimeter,temperature sensors, GNSS \\
+            \hline
+            IMU Outputs                 	& acceleration, angular rate, magnetic field , ambient pressure, deltaTheta, deltaVelocity\\
+            \hline
+        \end{tabular}   
+        \newline
+        \caption {Lord Microstrain 3DM®-GX5-45 GNSS-Aided Inertial Navigation System Specifications} \label{tab:realsense}
+        
+        \begin{tabular}{|| r || l || l || l ||}
+            \hline
+            Metric          & Accelerometer & Gyroscope & Magnetometer \\
+            \hline
+            std. range      & +/- 8 g       & +/- 300\degree/sec  & +/- 2.5 Gauss \\
+            \hline
+            Non linearity   & +/- 0.02 \% fs   & +/- 0.02 \% fs      & +/- 0.3 \% fs \\
+            \hline
+            Resolution      &<0.1 mg        &    <0.003\degree/sec &           --\\
+            \hline
+           
+        \end{tabular}
+        
+    \end{center}
+\end{table}
+
 
 \newpage
 \subsubsection{Problems Faced and Solutions}
@@ -182,7 +224,7 @@ Firstly, when we assembled wallie with TREX as the low level controller and a cu
 
 \begin{itemize}
     \item Center of mass of the assembled robot was not exactly at the geometric center.
-    \item RC mixing algorithm is not robust enough
+    \item RC mixing algorithm was not robust enough
     \item The MOSFET switch used between the battery and TREX limits the current, reducing the torque of motors.
 \end{itemize} 
 
