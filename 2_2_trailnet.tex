@@ -13,7 +13,7 @@
     \caption{NVIDIA's Trailnet Navigating a Drone}\vspace{-4mm}
 \end{figure}
 
-In 2017, four researchers published a paper titled "Toward Low-Flying Autonomous MAV Trail Navigation using Deep Neural Networks for Environmental Awareness"~\cite{trailNet} (Trailnet paper in short) with the funding of NVIDIA. The paper describes the following:
+In 2017, four researchers published a paper titled "Toward Low-Flying Autonomous MAV Trail Navigation using Deep Neural Networks for Environmental Awareness" ~\cite{trailnet} (Trailnet paper in short) with the funding of NVIDIA. The paper describes the following:
 
 \begin{itemize}
     \item Merits of approaching autonomous navigation as a classification problem
@@ -21,15 +21,15 @@ In 2017, four researchers published a paper titled "Toward Low-Flying Autonomous
     \item Data collection techniques for the Trailnet CNN
     \item Training Trailnet with a relatively small dataset
     \item Hardware hierarchy and the command flow between cameras, NVIDIA Jetson TX2 ~\cite{jetson_tx2} running ROS and the flight control board.
-    \item Usage of YOLO for obstacle detection and algorithm for obstacle avoidance.
+    \item Usage of YOLO ~\cite{yolo} for obstacle detection and algorithm for obstacle avoidance.
     \item Results and observations after flying the quadcopter autonomously in the forest trail for several kilometers.
 \end{itemize}
 
 \newpage
-\subsubsection{Navigation as Classification}
+\subsubsection{Navigation as Classification} 
 
 \paragraph{}
-Their model was based on a concept discussed in a 2016 paper %to_cite%,
+Their model was based on a concept discussed in a 2016 paper ~\cite{trailnet},
 : approaching autonomous navigation as a classification problem. That is, given an RGB image the CNN would output three probabilities: that of the camera facing left, right or center with respect to the trail. The key advantages in this approach are:
 
 \begin{itemize}
@@ -45,7 +45,7 @@ In the Trailnet paper %to_cite%
 They choose Resnet 18 as the basis for their architecture since it is small enough to be run on real time in a power-limited device like Jetson TX2. Resnets (Residual Networks) are special kinds of deep neural network that uses "short circuits" between layer outputs to prevent the problem of vanishing gradients, as a network gets too deep. By employing this technique, researchers have been able to create networks that are thousands of layers deep and still outperform shallower networks. Resnet-18, Resnet-50...etc are popular variants of applying this technique on deep convolutional neural networks.
 
 \paragraph{}
-Trailnet is not an RCNN. That is it does not remember past inputs nor correlate current inputs with past and future values for prediction. It is a simple CNN that gives a twist command based on the current image. Input to trailnet is a 320 x 180 x 3 RGB image and the outputs are six softmax nodes connected to the output of a slightly modified resnet-18. The six output layers signify the probability of the given image facing left, center and right and the robot (or UAV) being aligned left, center and right on the path. Weighted (by adjustable constants k1, k2) sum of these probabilities provide the angular twist command, which is used to steer the robot. This additional consideration of alignment, prevents the UAV slowly drifting off the center of the trail and crashing with tree branches near the trail edges. Together, the facing and align probabilities correct the course of the UAV to stay in the center of the path. YOLO and SLAM are used for obstacle avoidance.
+Trailnet is not an RCNN. That is, it does not remember past inputs nor correlate current inputs with past and future values for prediction. It is a simple CNN that gives a twist command based on the current image. Input to trailnet is a 320 x 180 x 3 RGB image and the outputs are six softmax nodes connected to the output of a slightly modified resnet-18. The six output layers signify the probability of the given image facing left, center and right and the robot (or UAV) being aligned left, center and right on the path. Weighted (by adjustable constants k1, k2) sum of these probabilities provide the angular twist command, which is used to steer the robot. This additional consideration of alignment, prevents the UAV slowly drifting off the center of the trail and crashing with tree branches near the trail edges. Together, the facing and align probabilities correct the course of the UAV to stay in the center of the path. YOLO ~\cite{yolo} and SLAM are used for obstacle avoidance.
 
 \paragraph{}
 Data collection was done using a camera rig with 3 cameras facing at three angles (left, center and right). The rig was carried by a person along a forest trail. The video feed from each camera had been then labeled accordingly. Similarly align to left, center and right data has been collected. A pretrained network (previously trained on IDSIA dataset %to_cite%
