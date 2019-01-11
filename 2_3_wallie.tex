@@ -18,7 +18,7 @@ Therefore, we needed a robot platform on which we can collect data and perform o
 \end{figure}
 
 \paragraph{}
-Firstly, we need a way to fix cameras in the robot for data collection and testing. I sketched a small camera rig to hold three Intel Realsense cameras, each facing: center, left and right at 30 degree angles from center. Samith Ashan, my coworker helped designed it in solidworks. That, a platform for the Jetson TX2 board and a holder for the Li-ion battery were then 3D printed. 
+Firstly, we needed a way to fix cameras in the robot for data collection and testing. I sketched a small camera rig to hold three Intel Realsense cameras, each facing: center, left and right at 30 degree angles from center. Samith Ashan, my coworker helped by designing it with solidworks. That and a platform for the Jetson TX2 board and a holder for the Li-ion battery were then 3D printed. 
 
 \subsubsection{Designing the Power Distribution System}
 
@@ -31,7 +31,7 @@ Firstly, we need a way to fix cameras in the robot for data collection and testi
 \end{figure}
 
 \paragraph{}
-We then designed a power distribution system for the robot, to deliver power from two batteries to all the sensors and actuators. We consulted Dr. Navinda and Mr. James Brett and came of with the following system. A 3 cell Li-Po delivers power to the Roboclaw Motor Controller, to which six 12V, 2.5D high torque motors are connected through a switch and a fuse (to prevent damage to the motor controller in case if the motors start stalling, as it happened once). The cameras and IMU are powered through an active USB hub. The USB hub LCD display and NVIDIA Jetson TX2 are powered through a robust power supply (12V, 5V) which is connected through a switch to the 7.4V Li-ion battery. Having two separate power sources for high-level and low-level systems helped through decoupling by reducing the chances of power failures from one network damaging the component in the other.
+We then built a power distribution system for the robot, to deliver power from two batteries to all the sensors and actuators. We consulted Dr. Navinda and Mr. James Brett and designed the following system. A 3 cell Li-Po delivers power to the Roboclaw Motor Controller, to which six 12V, 2.5D high torque motors are connected through a switch and a fuse (to prevent damage to the motor controller in case if the motors start stalling, as it happened once). The cameras and IMU are powered through an active USB hub. The USB hub, LCD display and NVIDIA Jetson TX2 are powered through a robust power supply (12V, 5V) which is connected through a switch to the 7.4V Li-ion battery. Decoupling the high-level and low-level systems by having two separate power sources helped by reducing the chances of power failures from one network damaging the components in the other.
 
 \paragraph{}
 We documented the design of the robot in CSIRO's confluence wiki pages, so that fellow researchers can use it in the future for their own activities. Most of our time in CSIRO (about 75\%) was spent in building and debugging the robot platform. 
@@ -40,7 +40,7 @@ We documented the design of the robot in CSIRO's confluence wiki pages, so that 
 \subsubsection{NVIDIA Jetson TX2}
 
 \paragraph{}
-Jetson TX2 ~\cite{jetson_tx2} is device released by NVIDIA as a solution to run computation-intensive programs on board of a low power consuming device. This credit-card sized device contains CPU that can run AMD64 Linux, a powerful GPU that can run multiple neural networks at once using just 7.5W of power. DATA61 RAG is starting to unify and standardize their sensor and actuator APIs. Hence, they were considering NVIDIA's Jetson TX2 and Xavier as potential candidates for the high level controller on their multiple types of wheeled, legged and aerial robots.
+DATA61 RAG is starting to unify and standardize their sensor and actuator APIs. Hence, they were considering NVIDIA's Jetson TX2 and Xavier as potential candidates for the high level controller on their multiple types of wheeled, legged and aerial robots. Jetson TX2 ~\cite{jetson_tx2} is device released by NVIDIA as a solution to run computation-intensive programs on board of a low power consuming device. This credit-card sized device contains CPU that can run AMD64 Linux and a powerful GPU that can run multiple neural networks at once using just 7.5W of power. 
 
 
 
@@ -67,16 +67,16 @@ Jetson TX2 ~\cite{jetson_tx2} is device released by NVIDIA as a solution to run 
 \end{table}
 
 \paragraph{}
-Hence we began using Jetson TX2 ~\cite{jetson_tx2} as the high level controller with Orbitty carrier board. We flashed it with NVIDIA's Linux for Tegra kernel and set it up with Jetpack 3.2.1 (Updated to Jetpack 3.3 later).
+Hence we began using this ~\cite{jetson_tx2} as the high level controller with Orbitty board. We flashed it with Linux for Tegra kernel and set it up with Jetpack 3.2.1 (Updated to Jetpack 3.3 later).
 
 % Image: Jetson
 \begin{figure}[H]
     \centering
     \includegraphics
-        [width=8cm]
+        [width=7cm]
         {figures/jetson.png}
     \includegraphics
-        [height=5cm]
+        [height=4cm]
         {figures/jetson_scale.jpg}
     \caption{NVIDIA Jetson TX2 }\vspace{-4mm}
 \end{figure}
@@ -95,7 +95,7 @@ Hence we began using Jetson TX2 ~\cite{jetson_tx2} as the high level controller 
 \end{figure}
 
 \paragraph{}
-Intel Realsense depth camera is able to output image streams of RGB, IR and Depth images as per following specifications. Due to the small size and versatility, RAG members considered using this as he de-facto vision sensor in low power robots. It can be connected to Jetson TX2 via a USB-C cable and there is an official ROS package from Intel with which it can communicate via serial and publish the image streams and diagnostic information.
+Intel Realsense depth camera is able to output image streams of RGB, IR and Depth images as per following specifications. Due to the small size and versatility, RAG members considered using this as the de-facto vision sensor in low power robots. It can be connected to Jetson TX2 via a USB-C cable and there is an official ROS package from Intel with which it can communicate via serial and publish the image streams and diagnostic information.
 
 % Table: Realsense
 \begin{table}[H]
@@ -183,7 +183,7 @@ The main advantage for choosing roboclaw was the availability of a compatible RO
 \end{figure}
 
 \paragraph{}
-Lord Microstrain 3DM®-GX5-45 GNSS-Aided Inertial Navigation System is the state of the art IMU sensor. We were given one of these to be used as the IMU sensor in our robot for hill-climbing. We found a relevant ROS package that can interface with the device via serial and publish the readings in two forms: rotation quaternions and cartesian vector components of the perceived acceleration. I used the vector components to find the direction of the slope.\\
+Lord Microstrain 3DM®-GX5-45 GNSS-Aided Inertial Navigation System is a highly accurate IMU sensor. We were given one of these to be used as the IMU sensor in our robot for hill-climbing. We found a relevant ROS package that can interface with the device via serial and publish the readings in two forms: rotation quaternions and cartesian vector components of the perceived acceleration. I used the vector components to find the direction of the slope.\\
 
 
 
@@ -229,13 +229,13 @@ Firstly, when we assembled wallie with TREX as the low level controller and a cu
 \end{itemize} 
 
 \paragraph{}
-To solve these issues, I improved the mixing algorithm, Uvindu reassembled the robot and we removed the switch. The performance improved, but after few hours of test run, the TREX controller burnt off. Dr. Navinda instructed us to troubleshoot it and submit a report. After intensive testing and discussion with James Brett, Pubudu Aravinda and Samith Ashan, we identified the key issue as the in-built fuses of the old TREX board that failed to function as a large current was drawn when motors stalled on the rough carpet floor. As a result, the hall sensor on the controller got burnt, short circuiting and damaging two MOSFETs on the same side of the H-bridge. Dr. Navinda accepted the report and ordered the Roboclaw controller as replacement (since TREX boards are outdated and unavailable in the market). 
+To solve these issues, I improved the mixing algorithm, Uvindu reassembled the robot and we removed the switch. The performance improved, but after few hours of test run, the TREX controller burnt off. Dr. Navinda instructed us to troubleshoot it and submit a report. After intensive testing and discussion with our coworkers: James Brett, Pubudu Aravinda and Samith Ashan, we identified the key issue as the in-built fuses of the old TREX board that failed to function as a large current was drawn when motors stalled on the rough carpet floor. As a result, the hall sensor on the controller got burnt, short circuiting and damaging two MOSFETs on the same side of the H-bridge. Dr. Navinda accepted the report and ordered the Roboclaw controller as replacement (since TREX boards are outdated and unavailable in the market). 
 
 \paragraph{}
 The prime advantage of the new Roboclaw was the associated ROS package. However, we soon found that the public package was severely outdated and not maintained. I contacted the manufacturers of Roboclaw and got a copy of the ROS package they use internally. That package also had several issues which we struggled with, throughout the project. After a week of debugging, I realized a main issue was that their driver was not thread safe. That is, when the ROS node receives a message, it runs the specified callback function, which is initiated on a new thread. If multiple such function calls are made in quick succession, it results in multiple threads that try to access the same resources (serial port). This results in unexpected frequent crashes. I changed the driver package to be thread safe and fixed some issues with incompatibility between velocity commands and odometry readings.
 
 \paragraph{}
-The D435 Realsense cameras are also not error free. We noticed that their output serial stream hangs unexpectedly and the only known solution is to unplug and plug them back. After some reading, I found that this is a hardware bug addressed by Intel as unfixable on this device. Therefore, I recommended Nick to not rely on these devices for critical tasks, such as the DARPA subterranean challenge.
+The D435 Realsense cameras are also not error free. We noticed that their output serial stream hangs unexpectedly and the only known solution is to unplug and plug them back. After some reading, I found that this is a hardware bug addressed by Intel as unfixable on this device. Therefore, I recommended our supervisor to not rely on these devices for critical tasks, such as the DARPA subterranean challenge.
 
 \paragraph{}
 When collecting data for hill climbing, I noticed a large variance (noise) in the IMU readings. Since our neural networks consider only the current inputs to provide instantaneous output velocity, noise in such an input would hinder the training process as the optimizer struggles to find correlation. I noticed that this high variance was due to the small slope of the hills and the increase in the percentage error due to that. To avoid this, I suggested fixing the IMU at an elevated angle to the horizontal on the robot.
